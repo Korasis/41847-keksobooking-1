@@ -184,7 +184,7 @@ var generatePins = function (bookingItem) {
     }
     renderBookingItem(bookingItem);
 
-    if (document.querySelector('.popup__close')){
+    if (document.querySelector('.popup__close')) {
       document.querySelector('.popup__close').addEventListener('click', closeBookingItem);
     }
   };
