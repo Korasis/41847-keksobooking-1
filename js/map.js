@@ -15,22 +15,22 @@ var titleList = [
 ];
 
 var typeList = {
-    flat: {
-        ru: 'Квартира',
-        minPrice: 1000
-    },
-    house: {
-        ru: 'Дом',
-        minPrice: 5000
-    },
-    bungalo: {
-        ru: 'Лачуга',
-        minPrice: 0
-    },
-    palace: {
-        ru: 'Дворец',
-        minPrice: 10000
-    }
+  flat: {
+    ru: 'Квартира',
+    minPrice: 1000
+  },
+  house: {
+    ru: 'Дом',
+    minPrice: 5000
+  },
+  bungalo: {
+    ru: 'Лачуга',
+    minPrice: 0
+  },
+  palace: {
+    ru: 'Дворец',
+    minPrice: 10000
+  }
 };
 
 var MIN_PRICE = 1000;
@@ -294,30 +294,30 @@ function enableFormElements() {
 }
 
 function clearForm() {
-    var inputs = formElement.querySelectorAll('input');
-    [].forEach.call(inputs, function (item) {
-        if (item.type === 'checkbox') {
-            item.checked = false;
-        } else {
-            item.value = '';
-        }
-    });
-    descriptionElement.value = '';
-    apartmentTypeElement.value = 'flat';
-    checkInElement.value = '12:00';
-    checkOutElement.value = '12:00';
-    roomsElement.value = '1';
-    capacityElement.value = '1';
+  var inputs = formElement.querySelectorAll('input');
+  [].forEach.call(inputs, function (item) {
+    if (item.type === 'checkbox') {
+      item.checked = false;
+    } else {
+      item.value = '';
+    }
+  });
+  descriptionElement.value = '';
+  apartmentTypeElement.value = 'flat';
+  checkInElement.value = '12:00';
+  checkOutElement.value = '12:00';
+  roomsElement.value = '1';
+  capacityElement.value = '1';
 }
 
 // сбрасываем метку
 function resetPins() {
-    var pins = document.querySelectorAll('.map__pin');
-    [].forEach.call(pins, function (item) {
-        if (!item.classList.contains('map__pin--main')) {
-            item.remove();
-        }
-    });
+  var pins = document.querySelectorAll('.map__pin');
+  [].forEach.call(pins, function (item) {
+    if (!item.classList.contains('map__pin--main')) {
+      item.remove();
+    }
+  });
 }
 
 // прячем затемняшку
@@ -327,7 +327,7 @@ function showMap() {
 
 // показываем затемняшку
 function hideMap() {
-    mapPins.classList.add('map--faded');
+  mapPins.classList.add('map--faded');
 }
 
 // получаем координаты метки
@@ -370,38 +370,38 @@ if (document.querySelector('.ad-form--disabled')) {
 pinButton.addEventListener('mouseup', pinButtonMouseupHandler);
 
 var setMinPrice = function () {
-    Object.keys(typeList).forEach(function (type) {
-        if (apartmentTypeElement.value === type) {
-            priceElement.setAttribute('min', typeList[type].minPrice);
-            priceElement.setAttribute('placeholder', typeList[type].minPrice);
-        }
-    });
+  Object.keys(typeList).forEach(function (type) {
+    if (apartmentTypeElement.value === type) {
+      priceElement.setAttribute('min', typeList[type].minPrice);
+      priceElement.setAttribute('placeholder', typeList[type].minPrice);
+    }
+  });
 };
 
 apartmentTypeElement.addEventListener('change', setMinPrice);
 
 function setTime(time1, time2) {
-    time1.value = time2.value;
+  time1.value = time2.value;
 }
 
 var setTimeOut = function () {
-    setTime(checkOutElement, checkInElement);
+  setTime(checkOutElement, checkInElement);
 };
 
 var setTimeIn = function () {
-    setTime(checkInElement, checkOutElement);
+  setTime(checkInElement, checkOutElement);
 };
 
 checkInElement.addEventListener('change', setTimeOut);
 checkOutElement.addEventListener('change', setTimeIn);
 
 function roomsChangeHandler() {
-    if (capacityElement.options.length > 0) {
-        [].forEach.call(capacityElement.options, function (item) {
-            item.selected = (ROOMS_CAPACITY[roomsElement.value][0] === item.value);
-            item.disabled = (ROOMS_CAPACITY[roomsElement.value].indexOf(item.value) < 0);
-        });
-    }
+  if (capacityElement.options.length > 0) {
+    [].forEach.call(capacityElement.options, function (item) {
+      item.selected = (ROOMS_CAPACITY[roomsElement.value][0] === item.value);
+      item.disabled = (ROOMS_CAPACITY[roomsElement.value].indexOf(item.value) < 0);
+    });
+  }
 }
 
 roomsChangeHandler();
@@ -409,11 +409,11 @@ roomsChangeHandler();
 roomsElement.addEventListener('change', roomsChangeHandler);
 
 function resetForm() {
-    disableFormElements();
-    hideMap();
-    resetPins();
-    clearForm();
-    setAddress();
+  disableFormElements();
+  hideMap();
+  resetPins();
+  clearForm();
+  setAddress();
 }
 
 reset.addEventListener('click', resetForm);
