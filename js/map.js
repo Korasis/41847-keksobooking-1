@@ -431,38 +431,40 @@ function resetForm() {
 reset.addEventListener('click', resetForm);
 
 pinButton.addEventListener('mousedown', function (evt) {
-    evt.preventDefault();
+  evt.preventDefault();
 
-    var startCoords = {
-        x: evt.clientX,
-        y: evt.clientY
+  var startCoords = {
+    x: evt.clientX,
+    y: evt.clientY
+  };
+
+  var onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+
+    var shift = {
+      x: startCoords.x - moveEvt.clientX,
+      y: startCoords.y - moveEvt.clientY
     };
 
-    var onMouseMove = function (moveEvt) {
-        moveEvt.preventDefault();
-
-        var shift = {
-            x: startCoords.x - moveEvt.clientX,
-            y: startCoords.y - moveEvt.clientY
-        };
-
-        startCoords = {
-            x: moveEvt.clientX,
-            y: moveEvt.clientY
-        };
-
-        pinButton.style.top = (pinButton.offsetTop - shift.y) + 'px';
-        pinButton.style.left = (pinButton.offsetLeft - shift.x) + 'px';
-        setAddress();
+    startCoords = {
+      x: moveEvt.clientX,
+      y: moveEvt.clientY
     };
 
-    var onMouseUp = function (upEvt) {
-        upEvt.preventDefault();
+    if (MIN_LOCATION_X < startCoords.x && startCoords.x < MAX_LOCATION_X && MIN_LOCATION_Y < startCoords.y && startCoords.y < MAX_LOCATION_Y) {
+      pinButton.style.top = (pinButton.offsetTop - shift.y) + 'px';
+      pinButton.style.left = (pinButton.offsetLeft - shift.x) + 'px';
+      setAddress();
+    }
+  };
 
-        document.removeEventListener('mousemove', onMouseMove);
-        document.removeEventListener('mouseup', onMouseUp);
-    };
+  var onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
 
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  };
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
 });
