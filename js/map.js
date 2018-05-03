@@ -280,7 +280,7 @@ function closeBookingItem() {
   offerModal.remove();
 }
 
-var onPopupEscPress = function(evt) {
+var onPopupEscPress = function (evt) {
   if (evt.keyCode === 27) {
     closeBookingItem();
   }
